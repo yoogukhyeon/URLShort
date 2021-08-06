@@ -14,6 +14,8 @@ app.set('view engine', 'ejs');
 
 //body-parser 미들웨서 등록
 app.use(bodyParser.urlencoded({extended: false}));
+
+
 app.get('/', async (req ,res) => {
     const shortUrls = await UrlShort.find()
     res.render('index' , { shortUrls : shortUrls})
@@ -31,7 +33,7 @@ app.get('/:shortUrl' , async (req , res) => {
     if(shortUrl == null){
         return res.sendStatus(404)
     }
-
+    
     shortUrl.clicks++
     shortUrl.save();
 
